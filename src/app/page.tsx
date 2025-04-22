@@ -6,6 +6,7 @@ import {
   DURATION_IN_FRAMES,
   VIDEO_FPS,
   VIDEO_HEIGHT,
+  VIDEO_ID,
   VIDEO_WIDTH,
 } from '../lib/constants';
 import { MyComposition } from '../remotion/Composition';
@@ -15,14 +16,15 @@ import type { CompositionProps, RenderVideoBody } from '@/types/types';
 
 export default function Home() {
   const [isRendering, setIsRendering] = useState(false);
+  const url = process.env.RENDER_VIDEO_URL;
 
   const handleClick = async () => {
     setIsRendering(true);
     const body: RenderVideoBody<CompositionProps> = {
-      compositionId: COMP_NAME,
-      inputProps: COMPOSITION_DATA[0],
+      composition_id: COMP_NAME,
+      input_props: COMPOSITION_DATA[0],
     };
-    const res = await fetch('/api/render-video', {
+    const res = await fetch(`${url}studio/render-video/${VIDEO_ID}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

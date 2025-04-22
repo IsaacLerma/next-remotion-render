@@ -1,6 +1,6 @@
 export interface RenderVideoBody<T> {
-  compositionId: string;
-  inputProps: T;
+  composition_id: string;
+  input_props: T;
 }
 
 export type CompositionProps = {
